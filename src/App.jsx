@@ -4,7 +4,7 @@ function App() {
 
   return (
     <>
-      <h1>This is Main Branch of KTM-Frontend</h1>
+      <h1>This is Development Branch of KTM-Frontend</h1>
     </>
   )
 }
