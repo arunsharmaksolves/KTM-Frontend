@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -13,9 +13,18 @@ import Home from "./page/Home";
 import Cookies from "js-cookie";
 import CreateTag from "./components/CreateTag";
 import CreateTrigger from "./components/CreateTrigger";
+import UpdateTag from "./components/UpdateTag";
+import Script from "./components/Script";
 
 function App() {
-  const id = Cookies.get("id");
+  const [id,setId] = useState(null);
+  const getId =()=>{
+    setId(Cookies.get("id"))
+  }
+  useEffect(()=>{
+    getId()
+  },[id])
+
   return (
     <Router>
       <Routes>
@@ -29,6 +38,8 @@ function App() {
         <Route path="/createTag" element={id ? <CreateTag /> : <Login />} />
         <Route path="/trigger" element={id ? <Trigger/> : <Login />} />
         <Route path="/createTrigger" element={id ? <CreateTrigger/> : <Login />} />
+        <Route path="/updateTag/:id" element={id ? <UpdateTag/> : <Login />} />
+        <Route path="/script" element={id ? <Script/> : <Login />} />
 
         {/* magic found from medium */}
         <Route path="*" element={<Notfound />} />

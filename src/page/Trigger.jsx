@@ -27,13 +27,13 @@ const Trigger = () => {
       <SideBar />
 
       <div className="p-4 ml-64 h-screen pt-20 ">
-        <div className="p-4 border-2 border-slate-950 border-solid rounded-lg ">
+        <div className="p-4 border-2 border-slate-950 border-solid rounded-lg   ">
           <div className="flex justify-between">
             <h3 className="px-6 py-2">Triggers</h3>
             <NavLink to={'/createTrigger'} className="px-6 py-2 bg-blue-900 rounded-lg text-white"> New</NavLink >
           </div>
           <div className="flex flex-col">
-            <table className="min-w-full text-left text-sm font-light text-surface ">
+            <table className="w-1/1 text-left text-sm font-light text-surface ">
               <thead className="border-b border-neutral-200 font-medium dark:border-white/10">
                 <tr>
                   <th scope="col" className="px-6 py-4">
@@ -54,17 +54,17 @@ const Trigger = () => {
                 {trigger.map((t) => (
 
                   <tr key={t._id} className="border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-200">
-                    <td className=" text-wrap px-6 py-4 font-medium">
+                    <td className=" text-wrap px-3  py-4 font-medium break-all">
                       {t.triggerName}
                     </td>
-                    <td className="text-wrap px-6 py-4 font-medium">
+                    <td className="text-wrap px-3  py-4 font-medium break-all">
                       {t.triggerType}
                     </td>
-                    <td className="text-wrap px-6 py-4 font-medium">
+                    <td className="text-wrap px-3 py-4 font-medium break-all">
                         {t.key} = {t.value}
                     </td>
                
-                    <td className=" text-wrap px-6 py-4 font-medium">
+                    <td className="text-wrap px-3  py-4 font-medium break-all">
                     {new Date(t.createdAt).toDateString()}
                     </td>
                   </tr>

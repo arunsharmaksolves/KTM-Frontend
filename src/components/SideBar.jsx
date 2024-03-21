@@ -3,6 +3,8 @@ import { VscSignOut } from "react-icons/vsc";
 import { PiTagSimpleDuotone } from "react-icons/pi";
 import Cookies from "js-cookie";
 import { GrAction } from "react-icons/gr";
+import { MdOutlineDescription } from "react-icons/md";
+
 import {useNavigate,NavLink} from 'react-router-dom'
 import axios from "axios";
 
@@ -35,7 +37,7 @@ const SideBar = () => {
   return (
     <aside
       id="default-sidebar"
-      className="fixed top-0 left-0 z-40 w-64 h-screen "
+      className="fixed top-0 left-0 z-2 w-64 h-screen "
       aria-label="Sidebar"
     >
       <div className="h-full px-3 py-4 overflow-y-auto border-2 border-black-500">
@@ -57,6 +59,12 @@ const SideBar = () => {
               <span className="inline-flex items-center justify-center w-3 h-3 p-3 ms-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
                 {triggerCount}
               </span>
+            </NavLink>
+          </li>
+          <li>
+          <NavLink to ="/script" className="flex justify-center items-center p-2  rounded-lg  hover:cursor-pointer hover:bg-slate-200">
+          <MdOutlineDescription />          
+              <span className="flex-1 ms-3 whitespace-nowrap">Script</span>
             </NavLink>
           </li>
           {/* <li>
