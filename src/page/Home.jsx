@@ -59,11 +59,12 @@ const Home = () => {
                     <td className="text-wrap px-6 py-4 font-medium">
                       {t.tagType}
                     </td>
-                      {t.trigger.map((i)=>(
                     <td className="text-wrap px-6 py-4 font-medium">
-                        {i}
-                    </td>
-                      ))}
+                      {t.trigger.map((i)=>(
+                        <p key={i._id}> {i.triggerName}</p>
+                       
+                        ))}
+                        </td>
                     <td className=" text-wrap px-6 py-4 font-medium">
                     {new Date(t.createdAt).toDateString()}
                     </td>

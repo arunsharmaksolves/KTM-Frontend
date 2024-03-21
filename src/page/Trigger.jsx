@@ -53,7 +53,7 @@ const Trigger = () => {
               <tbody>
                 {trigger.map((t) => (
 
-                  <tr className="border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-200">
+                  <tr key={t._id} className="border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-200">
                     <td className=" text-wrap px-6 py-4 font-medium">
                       {t.triggerName}
                     </td>
