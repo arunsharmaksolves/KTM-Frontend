@@ -5,6 +5,9 @@ import axios from "axios";
 
 import { toast } from "react-toastify";
 import SideBar from "./SideBar";
+import Navbar from './Navbar';
+import Cookies from "js-cookie";
+
 
 const CreateTag = () => {
   const {
@@ -18,6 +21,7 @@ const CreateTag = () => {
   const triggerType = watch("triggerType");
 
   const onSubmit = async (data) => {
+    data.userId = Cookies.get("id")
     try {
       const res =await axios.post('http://localhost:3000/api/tagTrigger/createTag',{data})
       console.log(res)
@@ -31,6 +35,8 @@ const CreateTag = () => {
   return (
     <>
       <SideBar />
+      <Navbar/>
+
       <main className="flex justify-center p-4 h-screen py-20  ml-64">
         <div className="flex flex-col gap-y-5 px-10 py-10 h-min border-solid border-2 border-black-500 rounded-2xl w-[460px]">
           <p className="text-center text-2xl font-bold  ">Tag Configuration</p>

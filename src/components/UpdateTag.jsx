@@ -3,6 +3,9 @@ import SideBar from "./SideBar";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Navbar from './Navbar';
+import Cookies from "js-cookie";
+
 
 const updateTag = () => {
   const tagId = useLocation().pathname.split("/")[2];
@@ -15,11 +18,12 @@ const updateTag = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
+        const id = Cookies.get('id')
         const taginfo = await axios.get(
           "http://localhost:3000/api/tagTrigger/getOneTag/" + tagId
         );
         const triggerInfo = await axios.get(
-          "http://localhost:3000/api/trigger/getAllTrigger/"
+          "http://localhost:3000/api/trigger/getAllTrigger/"+id
         );
         setTag(taginfo.data);
         console.log(taginfo.data);
@@ -70,6 +74,8 @@ const updateTag = () => {
   return (
     <>
       <SideBar />
+      <Navbar/>
+
       <div className="ml-64 p-4 flex items-center flex-col">
         <div className="px-4 sm:px-0">
           <h3 className="text-base font-semibold leading-7 text-gray-900">

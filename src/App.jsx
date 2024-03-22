@@ -8,23 +8,16 @@ import Notfound from "./page/Notfound";
 import Login from "./page/Login";
 import ForgotPassword from "./page/ForgotPassword";
 import ResetPassword from "./page/ResetPassword";
-import Trigger from './page/Trigger'
+import Trigger from "./page/Trigger";
 import Home from "./page/Home";
 import Cookies from "js-cookie";
 import CreateTag from "./components/CreateTag";
 import CreateTrigger from "./components/CreateTrigger";
 import UpdateTag from "./components/UpdateTag";
 import Script from "./components/Script";
+import Analytics from "./components/Analytics";
 
 function App() {
-  const [id,setId] = useState(null);
-  const getId =()=>{
-    setId(Cookies.get("id"))
-  }
-  useEffect(()=>{
-    getId()
-  },[id])
-
   return (
     <Router>
       <Routes>
@@ -34,12 +27,13 @@ function App() {
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/reset-password/:id" element={<ResetPassword />} />
 
-        <Route path="/home" element={id ? <Home /> : <Login />} />
-        <Route path="/createTag" element={id ? <CreateTag /> : <Login />} />
-        <Route path="/trigger" element={id ? <Trigger/> : <Login />} />
-        <Route path="/createTrigger" element={id ? <CreateTrigger/> : <Login />} />
-        <Route path="/updateTag/:id" element={id ? <UpdateTag/> : <Login />} />
-        <Route path="/script" element={id ? <Script/> : <Login />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/createTag" element={<CreateTag />} />
+        <Route path="/trigger" element={<Trigger />} />
+        <Route path="/createTrigger" element={<CreateTrigger />} />
+        <Route path="/updateTag/:id" element={<UpdateTag />} />
+        <Route path="/script" element={<Script />} />
+        <Route path="/analytics" element={<Analytics />} />
 
         {/* magic found from medium */}
         <Route path="*" element={<Notfound />} />

@@ -1,21 +1,17 @@
-import React, { useEffect, useState } from "react";
-
-import SideBar from "../components/SideBar";
-import axios from "axios";
-import { NavLink } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Cookies from "js-cookie";
+import React, { useEffect,useState } from 'react'
+import SideBar from './SideBar'
+import axios from 'axios';
+import Navbar from './Navbar';
 
 
-const Trigger = () => {
-  const [trigger, setTrigger] = useState([]);
+const Analytics = () => {
+    const [trigger, setTrigger] = useState([]);
 
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const id = Cookies.get('id')
         const res = await axios.get(
-          "http://localhost:3000/api/trigger/getAllTrigger/"+id
+          "http://localhost:4000/events"
         );
         console.log(res.data);
         setTrigger(res.data)
@@ -24,34 +20,38 @@ const Trigger = () => {
       }
     };
     fetchTags();
+    // setInterval(()=>{
+    // },[1000])
   }, []);
 
   return (
+    
     <>
-      <SideBar />
-      <Navbar/>
-
-      <div className="p-4 ml-64 pt-20 ">
+    <SideBar/>
+    <Navbar/>
+    <div className="p-4 ml-64 h-screen">
         <div className="p-4 border-2 border-slate-950 border-solid rounded-lg   ">
           <div className="flex justify-between">
-            <h3 className="px-6 py-2 font-bold">Triggers</h3>
-            <NavLink to={'/createTrigger'} className="px-6 py-2 bg-blue-900 rounded-lg text-white"> New</NavLink >
+            <h3 className="px-6 py-2">Analytics-Dashboard</h3>
           </div>
           <div className="flex flex-col">
             <table className="w-1/1 text-left text-sm font-light text-surface ">
               <thead className="border-b border-neutral-200 font-medium dark:border-white/10">
                 <tr>
-                  <th scope="col" className="px-6 py-4">
-                    Trigger
+                  <th scope="col" className="px-6 py-4 break-all">
+                    Tag name
                   </th>
-                  <th scope="col" className="px-6 py-4">
-                    Event Type
+                  <th scope="col" className="px-6 py-4 break-all">
+                    Text
                   </th>
-                  <th scope="col" className="px-6 py-4">
-                    Filter
+                  <th scope="col" className="px-6 py-4 break-all">
+                    Event
                   </th>
-                  <th scope="col" className="px-6 py-4">
-                    Time
+                  <th scope="col" className="px-6 py-4 break-all">
+                    Location
+                  </th>
+                  <th scope="col" className="px-6 py-4 break-all">
+                    Timestamp
                   </th>
                 </tr>
               </thead>
@@ -60,17 +60,21 @@ const Trigger = () => {
 
                   <tr key={t._id} className="border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-200">
                     <td className=" text-wrap px-3  py-4 font-medium break-all">
-                      {t.triggerName}
+                      {t.target.tagName}
                     </td>
                     <td className="text-wrap px-3  py-4 font-medium break-all">
-                      {t.triggerType}
+                      {t.target.innerText}
                     </td>
                     <td className="text-wrap px-3 py-4 font-medium break-all">
-                        {t.key} = {t.value}
+                        {t.event}
+                    </td>
+                    <td className="text-wrap px-3 py-4 font-medium break-all">
+                        {t.location.city}{","}{t.location.country}
                     </td>
                
                     <td className="text-wrap px-3  py-4 font-medium break-all">
-                    {new Date(t.createdAt).toDateString()}
+                    {/* {new Date(t.createdAt).toDateString()} */}
+                    {(t.timeSpent*10).toFixed(2)}{" s"}
                     </td>
                   </tr>
                 ))}
@@ -80,7 +84,7 @@ const Trigger = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
-export default Trigger;
+export default Analytics

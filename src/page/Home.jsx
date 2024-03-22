@@ -3,15 +3,18 @@ import React, { useEffect, useState } from "react";
 import SideBar from "../components/SideBar";
 import axios from "axios";
 import { Link, NavLink } from "react-router-dom";
+import Navbar from "../components/Navbar";
+import Cookies from "js-cookie";
 
 const Home = () => {
   const [tags, setTags] = useState([]);
-
+  
   useEffect(() => {
+    const id = Cookies.get('id')
     const fetchTags = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3000/api/tagTrigger/getAllTag"
+          "http://localhost:3000/api/tagTrigger/getAllTag/"+id
         );
         console.log(res.data);
         setTags(res.data);
@@ -20,16 +23,19 @@ const Home = () => {
       }
     };
     fetchTags();
+    console.log(id)
   }, []);
 
   return (
     <>
       <SideBar />
+      <Navbar/>
+
 
       <div className="p-4 ml-64 h-full pt-20 ">
         <div className="p-4 border-2 border-slate-950 border-solid rounded-lg ">
           <div className="flex justify-between items-center">
-            <h3 className="px-6 py-2">Tags</h3>
+            <h3 className="px-6 py-2 font-bold">Tags</h3>
             <div className="flex gap-2">
               <NavLink
                 to={"/createTag"}
