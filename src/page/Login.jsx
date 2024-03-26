@@ -1,14 +1,14 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import axios from 'axios'
-import Cookies from 'js-cookie'
-import {jwtDecode} from 'jwt-decode';
+import axios from "axios";
+import Cookies from "js-cookie";
+import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
-
+import Navbar from "../components/Navbar";
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -16,38 +16,39 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
-
-  const onSubmit = async(data) => {
+  const onSubmit = async (data) => {
     try {
       // console.log(data);
-      const res = await axios.post('http://localhost:3000/api/login',{
-        data
-      })
-      console.log(res.data.verificationToken)
-      const token = res.data.verificationToken
+      const res = await axios.post("http://localhost:3000/api/login", {
+        data,
+      });
+      // console.log(res.data.verificationToken);
+      const token = res.data.verificationToken;
       const decodedToken = jwtDecode(token);
-      console.log(decodedToken)
-      Cookies.set('id',`${decodedToken.ID}`,{expires:7})
+      // console.log(decodedToken);
+      Cookies.set("token", `${token}`, { expires: 7 });
 
-      toast.success("Login Successfully")
-      reset()
-      navigate('/home')
+      toast.success("Login Successfully");
+      reset();
+      navigate("/home");
     } catch (error) {
-      console.log(error)
-      toast.error(error.response.data.message)
+      console.log(error);
+      toast.error(error.response.data.message);
     }
   };
   return (
     <>
-      <main className="flex justify-center items-center h-screen">
+        <Navbar/>
+        <main className="flex justify-center items-center h-[calc(100vh-50px)]">
         <div className="flex flex-col gap-y-5 px-20 py-10 border-solid border-2 border-black-500 rounded-2xl ">
-          <p className="text-center text-2xl font-bold  ">Log in to your account</p>
+          <p className="text-center text-2xl font-bold  ">
+            Log in to your account
+          </p>
 
           <form
             className="flex flex-col gap-y-2"
             onSubmit={handleSubmit(onSubmit)}
           >
-
             <label htmlFor="Email" className="text-sm">
               Email
             </label>
@@ -57,19 +58,22 @@ const Login = () => {
               name="Email"
               id="Email"
               placeholder="Enter your email"
-              {...register("email",{
-                required:"Email is required"
+              {...register("email", {
+                required: "Email is required",
               })}
             />
-          {errors.email && <p className="text-red-500 text-xs">{errors.email.message}</p>}
-              
-              <div className="flex justify-between">
+            {errors.email && (
+              <p className="text-red-500 text-xs">{errors.email.message}</p>
+            )}
 
-            <label htmlFor="Password" className="text-sm">
-              Password
-            </label>
-            <Link to='/forgotPassword' className="text-sm text-indigo-800">Forgot Password</Link>
-              </div>
+            <div className="flex justify-between">
+              <label htmlFor="Password" className="text-sm">
+                Password
+              </label>
+              <Link to="/forgotPassword" className="text-sm text-indigo-800">
+                Forgot Password
+              </Link>
+            </div>
             <input
               className="border-2 rounded-md p-1 text-sm text-blue-900 placeholder:text-xs "
               type="password"
@@ -77,15 +81,16 @@ const Login = () => {
               id="Password"
               placeholder="Enter your passwoord"
               {...register("password", {
-                required:"Password is required",
+                required: "Password is required",
                 minLength: {
                   value: 5,
                   message: "Password should be at-least 5 characters",
                 },
               })}
             />
-            {errors.password && <p className="text-red-500 text-xs">{errors.password.message}</p>}
-
+            {errors.password && (
+              <p className="text-red-500 text-xs">{errors.password.message}</p>
+            )}
 
             <input
               type="submit"

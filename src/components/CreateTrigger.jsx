@@ -1,12 +1,16 @@
 import React from "react";
-import {useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 
 import { toast } from "react-toastify";
 import SideBar from "./SideBar";
+import Navbar from "./Navbar";
+import Cookies from "js-cookie";
 
 const createTrigger = () => {
+  const token = Cookies.get('token')
+
   const {
     register,
     handleSubmit,
@@ -19,30 +23,39 @@ const createTrigger = () => {
 
   const onSubmit = async (data) => {
     try {
-        console.log(data)
-      const res =await axios.post('http://localhost:3000/api/trigger/createTrigger',{data})
-      console.log(res)
-      toast.success("Trigger Created")
-      reset()
+      data.userId = Cookies.get("id");
+      console.log(data);
+      const res = await axios.post(
+        "http://localhost:3000/api/trigger/createTrigger",
+        { data },{
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(res);
+      toast.success("Trigger Created");
+      reset();
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);
     }
   };
   return (
-    <>
+    <div className="flex">
       <SideBar />
-      <main className="flex justify-center p-4 h-screen py-20  ml-64">
-        <div className="flex flex-col gap-y-5 px-10 py-10 h-min border-solid border-2 border-black-500 rounded-2xl w-[460px]">
-            <p className="text-center pb-5 text-2xl font-bold ">
-              Trigger Configuration
-            </p>
+
+      <main className="flex flex-col items-center p-4 h-screen w-full">
+        <Navbar />
+        <div className="flex flex-col gap-y-5 p-10 h-min border-solid border-2 border-black-500 rounded-2xl sm:w-[425px] ">
+          <p className="text-center pb-5 text-2xl font-bold ">
+            Trigger Configuration
+          </p>
 
           <form
             className="flex flex-col gap-y-2"
             onSubmit={handleSubmit(onSubmit)}
           >
-           
             <label htmlFor="triggerName" className="text-sm">
               Trigger Name
             </label>
@@ -75,8 +88,8 @@ const createTrigger = () => {
               <option value="">Select an option</option>
               <option value="Page View">Page View</option>
               <option value="Click">Click</option>
-              <option value="Timing">Timing</option>
-              <option value="Social">Social</option>
+              {/* <option value="Timing">Timing</option>
+              <option value="Social">Social</option> */}
             </select>
             {errors.triggerType && (
               <p className="text-red-500 text-xs">
@@ -144,7 +157,7 @@ const createTrigger = () => {
           </form>
         </div>
       </main>
-    </>
+    </div>
   );
 };
 

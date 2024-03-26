@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import { toast } from "react-toastify";
+import Navbar from "../components/Navbar";
 
 
 const ForgotPassword = () => {
@@ -27,7 +28,8 @@ const ForgotPassword = () => {
 
   return (
     <>
-      <main className="flex justify-center items-center h-screen">
+        <Navbar/>
+        <main className="flex justify-center items-center h-[calc(100vh-50px)] p-10">
         <div className="flex flex-col gap-y-5 px-20 py-10 mx-auto border-solid border-2 border-black-500 rounded-2xl ">
           <h1 className="mb-1 text-xl font-bold leading-tight tracking-tight  md:text-2xl ">
             Forgot your password?
