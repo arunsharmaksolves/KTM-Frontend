@@ -12,6 +12,8 @@ const SideBar = () => {
   const navigate = useNavigate();
   const [tagCount, setTagCount] = useState();
   const [triggerCount, setTriggerCount] = useState();
+  const token = Cookies.get('token')
+
 
   const logOut = () => {
     Cookies.remove("id");
@@ -23,10 +25,18 @@ const SideBar = () => {
     try {
       const id = Cookies.get('id')
       const countTag = await axios.get(
-        "http://localhost:3000/api/tagTrigger/countAllTag/"+id
+        "http://localhost:3000/api/tagTrigger/countAllTag/"+id,{
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       const countTrigger = await axios.get(
-        "http://localhost:3000/api/trigger/countAllTrigger/"+id
+        "http://localhost:3000/api/trigger/countAllTrigger/"+id,{
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       console.log(countTag.data)
       setTagCount(countTag.data);

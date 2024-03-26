@@ -8,13 +8,19 @@ import Cookies from "js-cookie";
 
 const Trigger = () => {
   const [trigger, setTrigger] = useState([]);
+  const token = Cookies.get('token')
+
 
   useEffect(() => {
     const fetchTags = async () => {
       try {
         const id = Cookies.get("id");
         const res = await axios.get(
-          "http://localhost:3000/api/trigger/getAllTrigger/" + id
+          "http://localhost:3000/api/trigger/getAllTrigger/" + id,{
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         console.log(res.data);
         setTrigger(res.data);
@@ -29,7 +35,7 @@ const Trigger = () => {
     <div className="flex ">
       <SideBar />
 
-      <div className="p-4 h-full w-full text-xs sm:text-sm md:text-base  ">
+      <div className="p-4 h-full w-fit sm:w-full text-xs sm:text-sm md:text-base  ">
         <Navbar />
         <div className="p-4 border-2 border-slate-950 border-solid rounded-lg   ">
         <div className="flex justify-between items-center">
@@ -61,10 +67,10 @@ const Trigger = () => {
                 </tr>
               </thead>
               <tbody>
-                {trigger.map((t) => (
+                {trigger.map((t,index) => (
                   <tr
                     key={t._id}
-                    className="border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-200"
+                    className={`${index % 2 === 0 ? 'bg-red-100' : ''} border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-200`}
                   >
                     <td className=" text-wrap px-3  py-4 font-medium break-all">
                       {t.triggerName}

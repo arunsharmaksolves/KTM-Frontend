@@ -10,6 +10,8 @@ import Cookies from "js-cookie";
 
 
 const CreateTag = () => {
+  const token = Cookies.get('token')
+
   const {
     register,
     handleSubmit,
@@ -23,7 +25,11 @@ const CreateTag = () => {
   const onSubmit = async (data) => {
     data.userId = Cookies.get("id")
     try {
-      const res =await axios.post('http://localhost:3000/api/tagTrigger/createTag',{data})
+      const res =await axios.post('http://localhost:3000/api/tagTrigger/createTag',{data},{
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       console.log(res)
       toast.success("Tag Created")
       reset()

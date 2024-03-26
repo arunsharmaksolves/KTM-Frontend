@@ -9,6 +9,8 @@ import Navbar from "./Navbar";
 import Cookies from "js-cookie";
 
 const createTrigger = () => {
+  const token = Cookies.get('token')
+
   const {
     register,
     handleSubmit,
@@ -25,7 +27,11 @@ const createTrigger = () => {
       console.log(data);
       const res = await axios.post(
         "http://localhost:3000/api/trigger/createTrigger",
-        { data }
+        { data },{
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
       );
       console.log(res);
       toast.success("Trigger Created");

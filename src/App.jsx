@@ -32,11 +32,14 @@ function App() {
           <Route path="/home" element={<Home />} />
 
           <Route path="/createTag" element={<CreateTag />} />
-          <Route path="/trigger" element={<Trigger />} />
           <Route path="/createTrigger" element={<CreateTrigger />} />
           <Route path="/updateTag/:id" element={<UpdateTag />} />
           <Route path="/script" element={<Script />} />
           <Route path="/analytics" element={<Analytics />} />
+        </Route>
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="/trigger" element={<Trigger />} />
         </Route>
 
         {/* magic found from medium */}

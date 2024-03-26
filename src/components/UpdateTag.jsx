@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import SideBar from "./SideBar";
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams, useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { toast } from "react-toastify";
-import Navbar from './Navbar';
+import Navbar from "./Navbar";
 import Cookies from "js-cookie";
 
-
 const updateTag = () => {
-  const tagId = useLocation().pathname.split("/")[2];
+  const tagId = useParams().id;
+  console.log(tagId);
+  const token = Cookies.get('token')
+
+
+  // const [searchParams, setSearchParams] = useSearchParams();
+  // console.log("search = ",searchParams.get('name'),searchParams.get('age'))
   const [tag, setTag] = useState([]);
   const [trigger, setTrigger] = useState([]);
   const [trig, setTrig] = useState([]);
@@ -18,20 +23,31 @@ const updateTag = () => {
   useEffect(() => {
     const fetch = async () => {
       try {
-        const id = Cookies.get('id')
+        const id = Cookies.get("id");
         const taginfo = await axios.get(
-          "http://localhost:3000/api/tagTrigger/getOneTag/" + tagId
+          "http://localhost:3000/api/tagTrigger/getOneTag/" + tagId,{
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         const triggerInfo = await axios.get(
-          "http://localhost:3000/api/trigger/getAllTrigger/"+id
+          "http://localhost:3000/api/trigger/getAllTrigger/" + id,{
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         setTag(taginfo.data);
-        console.log(taginfo.data);
-        console.log(triggerInfo.data)
+        // console.log(taginfo.data);
+        // console.log(triggerInfo.data)
         setTrig(taginfo.data.trigger);
-        setTrigger(triggerInfo.data.filter(
-          (t) => !taginfo.data.trigger.some((tr) => tr.triggerId === t._id)
-        ));      } catch (error) {
+        setTrigger(
+          triggerInfo.data.filter(
+            (t) => !taginfo.data.trigger.some((tr) => tr.triggerId === t._id)
+          )
+        );
+      } catch (error) {
         console.log(error);
       }
     };
@@ -39,7 +55,7 @@ const updateTag = () => {
     fetch();
   }, [updateMode]);
 
-  const handleCheckboxChange = (triggerId,triggerName) => {
+  const handleCheckboxChange = (triggerId, triggerName) => {
     const updatedTriggers = [...updateTrig];
     const index = updatedTriggers.findIndex((t) => t.id === triggerId);
 
@@ -52,31 +68,34 @@ const updateTag = () => {
     setUpdateTrig(updatedTriggers);
   };
 
-  const handleUpdate = async() =>{
-    if(updateTrig.length === 0){
-      toast.warning('First select a value')
-      return
+  const handleUpdate = async () => {
+    if (updateTrig.length === 0) {
+      toast.warning("First select a value");
+      return;
     }
     try {
-      const res = await axios.patch('http://localhost:3000/api/tagTrigger/addTrigger/'+tagId,{
-         updateTrig
-      })
-      console.log(res.data)
-      console.log(updateTrig)
-      toast.success("Trigger Added")
-      setUpdateTrig([])
-      setUpdateMode(false)
+      const res = await axios.patch(
+        "http://localhost:3000/api/tagTrigger/addTrigger/" + tagId,
+        {
+          updateTrig,
+        }
+      );
+      console.log(res.data);
+      console.log(updateTrig);
+      toast.success("Trigger Added");
+      setUpdateTrig([]);
+      setUpdateMode(false);
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
-  }
+  };
 
   return (
     <div className="flex ">
       <SideBar />
 
       <div className="p-4 h-full w-full flex items-center flex-col">
-      <Navbar/>
+        <Navbar />
         <div className="px-4 sm:px-0">
           <h3 className="text-base font-semibold leading-7 text-gray-900">
             Tag Information
@@ -127,90 +146,91 @@ const updateTag = () => {
           </dl>
         </div>
 
+        {trigger.length > 0 && (
+          <>
+            {updateMode ? (
+              <div className="flex gap-2">
+                <button
+                  className="mt-10 bg-blue-400 text-xl p-2 rounded-lg"
+                  onClick={() => setUpdateMode(false)}
+                >
+                  Cancle
+                </button>
+                <button
+                  onClick={handleUpdate}
+                  className="mt-10 bg-green-400 text-xl p-2 rounded-lg"
+                >
+                  Update
+                </button>
+              </div>
+            ) : (
+              <button
+                className="mt-10 bg-blue-400 text-xl p-2 rounded-lg"
+                onClick={() => setUpdateMode(true)}
+              >
+                Click To Add Triggers
+              </button>
+            )}
 
-        {trigger.length > 0 && <>
-        {updateMode ? (
-          <div className="flex gap-2">
-            <button
-              className="mt-10 bg-blue-400 text-xl p-2 rounded-lg"
-              onClick={() => setUpdateMode(false)}
-            >
-              Cancle
-            </button>
-            <button onClick={handleUpdate} className="mt-10 bg-green-400 text-xl p-2 rounded-lg">
-              Update
-            </button>
-          </div >
-        ) : (
-          <button
-            className="mt-10 bg-blue-400 text-xl p-2 rounded-lg"
-            onClick={() => setUpdateMode(true)}
-          >
-            Click To Add Triggers
-          </button>
+            <div className=" h-fit pt-10 w-full">
+              <div className="p-4 border-2 border-slate-950 border-solid rounded-lg ">
+                <div className="flex justify-between">
+                  <h3 className="px-6 py-2">Triggers</h3>
+                </div>
+                <div className="flex flex-col">
+                  <table className="min-w-full text-left text-sm font-light text-surface ">
+                    <thead className="border-b border-neutral-200 font-medium dark:border-white/10">
+                      <tr>
+                        <th scope="col" className="px-6 py-4">
+                          Trigger
+                        </th>
+                        <th scope="col" className="px-6 py-4">
+                          Event Type
+                        </th>
+                        <th scope="col" className="px-6 py-4">
+                          Filter
+                        </th>
+                        {updateMode && (
+                          <th scope="col" className="px-6 py-4">
+                            Select
+                          </th>
+                        )}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {trigger.map((t) => (
+                        <tr
+                          key={t._id}
+                          className="border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-200"
+                        >
+                          <td className="text-wrap px-6 py-4 font-medium break-all">
+                            {t.triggerName}
+                          </td>
+                          <td className="text-wrap px-6 py-4 font-medium break-all">
+                            {t.triggerType}
+                          </td>
+                          <td className="text-wrap px-6 py-4 font-medium break-all">
+                            {t.key} = {t.value}
+                          </td>
+                          {updateMode && (
+                            <td className="text-wrap px-6 py-4 font-medium break-all">
+                              <input
+                                type="checkbox"
+                                onChange={() =>
+                                  handleCheckboxChange(t._id, t.triggerName)
+                                }
+                              />
+                            </td>
+                          )}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </>
         )}
-
-
-        <div className=" h-fit pt-10 w-full">
-          <div className="p-4 border-2 border-slate-950 border-solid rounded-lg ">
-            <div className="flex justify-between">
-              <h3 className="px-6 py-2">Triggers</h3>
-            </div>
-            <div className="flex flex-col">
-              <table className="min-w-full text-left text-sm font-light text-surface ">
-                <thead className="border-b border-neutral-200 font-medium dark:border-white/10">
-                  <tr>
-                    <th scope="col" className="px-6 py-4">
-                      Trigger
-                    </th>
-                    <th scope="col" className="px-6 py-4">
-                      Event Type
-                    </th>
-                    <th scope="col" className="px-6 py-4">
-                      Filter
-                    </th>
-                    {updateMode && (
-                      <th scope="col" className="px-6 py-4">
-                        Select
-                      </th>
-                    )}
-                  </tr>
-                </thead>
-                <tbody>
-                  {trigger.map((t) => (
-                    <tr
-                      key={t._id}
-                      className="border-b border-neutral-200 transition duration-300 ease-in-out hover:bg-neutral-100 dark:border-white/10 dark:hover:bg-neutral-200"
-                    >
-                    <td className="text-wrap px-6 py-4 font-medium break-all">
-                        {t.triggerName}
-                      </td>
-                      <td className="text-wrap px-6 py-4 font-medium break-all">
-                        {t.triggerType}
-                      </td>
-                      <td className="text-wrap px-6 py-4 font-medium break-all">
-                        {t.key} = {t.value}
-                      </td>
-                      {updateMode && (
-                    <td className="text-wrap px-6 py-4 font-medium break-all">
-                    <input
-                            type="checkbox"
-                            onChange={() =>
-                              handleCheckboxChange(t._id, t.triggerName)
-                            }
-                          />
-                        </td>
-                      )}
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-        </>
-
-}
       </div>
     </div>
   );

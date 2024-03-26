@@ -2,21 +2,29 @@ import React, { useEffect, useState } from "react";
 
 import SideBar from "../components/SideBar";
 import axios from "axios";
-import { Link, NavLink, useLocation } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Cookies from "js-cookie";
 
 const Home = () => {
+  const params = useParams()
+  // console.log(params)
 
   const [tags, setTags] = useState([]);
-  // const token = Cookies.get('id')
   
   useEffect(() => {
     const id = Cookies.get('id')
+    const token = Cookies.get('token')
+
     const fetchTags = async () => {
       try {
         const res = await axios.get(
           "http://localhost:3000/api/tagTrigger/getAllTag/"+id
+          ,{
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
         );
         // console.log(res.data);
         setTags(res.data);
@@ -32,7 +40,7 @@ const Home = () => {
     <div className="flex ">
       <SideBar />
 
-      <div className="p-4 h-full w-full text-xs sm:text-sm md:text-base  ">
+      <div className="p-4 h-full w-fit sm:w-full text-xs sm:text-sm md:text-base  ">
       <Navbar/>
         <div className="p-4 border-2 border-slate-950 border-solid rounded-lg ">
           <div className="flex justify-between items-center">

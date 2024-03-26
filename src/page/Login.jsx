@@ -5,6 +5,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
+import Navbar from "../components/Navbar";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -21,10 +22,10 @@ const Login = () => {
       const res = await axios.post("http://localhost:3000/api/login", {
         data,
       });
-      console.log(res.data.verificationToken);
+      // console.log(res.data.verificationToken);
       const token = res.data.verificationToken;
       const decodedToken = jwtDecode(token);
-      console.log(decodedToken);
+      // console.log(decodedToken);
       Cookies.set("token", `${token}`, { expires: 7 });
 
       toast.success("Login Successfully");
@@ -37,7 +38,8 @@ const Login = () => {
   };
   return (
     <>
-      <main className="flex justify-center items-center h-screen">
+        <Navbar/>
+        <main className="flex justify-center items-center h-[calc(100vh-50px)]">
         <div className="flex flex-col gap-y-5 px-20 py-10 border-solid border-2 border-black-500 rounded-2xl ">
           <p className="text-center text-2xl font-bold  ">
             Log in to your account

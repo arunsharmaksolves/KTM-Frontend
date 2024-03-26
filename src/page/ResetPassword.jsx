@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios'
-import {jwtDecode} from 'jwt-decode';
 
 import { toast } from "react-toastify";
+import Navbar from "../components/Navbar";
 
 const ResetPassword = () => {
   const params = useLocation()
@@ -38,8 +38,8 @@ const ResetPassword = () => {
           };
   return (
     <>
-    <main className="flex justify-center items-center h-screen">
-        <div className="flex flex-col gap-y-5 px-20 py-10 border-solid border-2 border-black-500 rounded-2xl ">
+        <Navbar/>
+        <main className="flex justify-center items-center h-[calc(100vh-50px)]">        <div className="flex flex-col gap-y-5 px-20 py-10 border-solid border-2 border-black-500 rounded-2xl ">
           <p className="text-center text-2xl font-bold  ">Reset Password</p>
 
           <form
