@@ -15,6 +15,7 @@ const SideBar = () => {
 
   const logOut = () => {
     Cookies.remove("id");
+    Cookies.remove("token");
     navigate("/login");
   };
 
@@ -42,7 +43,7 @@ const SideBar = () => {
   return (
     <aside
       id="default-sidebar"
-      className="fixed top-0 left-0 z-2 w-64 h-screen "
+      className="w-fit h-screen "
       aria-label="Sidebar"
     >
       <div className="h-full px-3 py-4 overflow-y-auto border-2 border-black-500">
@@ -50,7 +51,7 @@ const SideBar = () => {
           <li>
             <NavLink
               to="/home"
-              className="flex justify-center items-center p-2 rounded-lg  hover:cursor-pointer hover:bg-slate-200"
+              className="aria-[current=page]:text-red-600 flex justify-center items-center p-2 rounded-lg  hover:cursor-pointer hover:bg-slate-200"
             >
               <PiTagSimpleDuotone />
 
@@ -63,7 +64,7 @@ const SideBar = () => {
           <li>
             <NavLink
               to="/trigger"
-              className="flex justify-center items-center p-2  rounded-lg  hover:cursor-pointer hover:bg-slate-200"
+              className=" aria-[current=page]:text-red-600 flex justify-center items-center p-2  rounded-lg  hover:cursor-pointer hover:bg-slate-200"
             >
               <GrAction />
               <span className="flex-1 ms-3 whitespace-nowrap">Triggers</span>
@@ -75,7 +76,7 @@ const SideBar = () => {
           <li>
             <NavLink
               to="/script"
-              className="flex justify-center items-center p-2  rounded-lg  hover:cursor-pointer hover:bg-slate-200"
+              className="aria-[current=page]:text-red-600 flex justify-center items-center p-2  rounded-lg  hover:cursor-pointer hover:bg-slate-200"
             >
               <MdOutlineDescription />
               <span className="flex-1 ms-3 whitespace-nowrap">Script</span>
@@ -91,7 +92,7 @@ const SideBar = () => {
           <li>
             <NavLink
               to="/analytics"
-              className="flex justify-center items-center p-2  rounded-lg  hover:cursor-pointer hover:bg-slate-200"
+              className="aria-[current=page]:text-red-600 flex justify-center items-center p-2  rounded-lg  hover:cursor-pointer hover:bg-slate-200"
             >
             <TbDeviceAnalytics />
               <span className="flex-1 ms-3 whitespace-nowrap">Analytics</span>
@@ -104,7 +105,7 @@ const SideBar = () => {
               onClick={logOut}
             >
               <VscSignOut />
-              <span className="flex-1 ms-3 whitespace-nowrap">Sign Up</span>
+              <span className="flex-1 ms-3 whitespace-nowrap">Log Out</span>
             </div>
           </li>
         </ul>

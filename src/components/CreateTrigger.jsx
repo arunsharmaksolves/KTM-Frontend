@@ -5,10 +5,8 @@ import axios from "axios";
 
 import { toast } from "react-toastify";
 import SideBar from "./SideBar";
-import Navbar from './Navbar';
+import Navbar from "./Navbar";
 import Cookies from "js-cookie";
-
-
 
 const createTrigger = () => {
   const {
@@ -23,7 +21,7 @@ const createTrigger = () => {
 
   const onSubmit = async (data) => {
     try {
-      data.userId = Cookies.get('id')
+      data.userId = Cookies.get("id");
       console.log(data);
       const res = await axios.post(
         "http://localhost:3000/api/trigger/createTrigger",
@@ -38,12 +36,12 @@ const createTrigger = () => {
     }
   };
   return (
-    <>
+    <div className="flex">
       <SideBar />
-      <Navbar/>
 
-      <main className="flex justify-center p-4 h-screen py-20  ml-64">
-        <div className="flex flex-col gap-y-5 px-10 py-10 h-min border-solid border-2 border-black-500 rounded-2xl w-[460px]">
+      <main className="flex flex-col items-center p-4 h-screen w-full">
+        <Navbar />
+        <div className="flex flex-col gap-y-5 p-10 h-min border-solid border-2 border-black-500 rounded-2xl sm:w-[425px] ">
           <p className="text-center pb-5 text-2xl font-bold ">
             Trigger Configuration
           </p>
@@ -112,13 +110,11 @@ const createTrigger = () => {
                           <option value="PageHostname">Page Hostname</option>
                         </>
                       ) : (
-                            <>
-                              <option value="ClickId">ClickId</option>
-                              <option value="ClickText">ClickText</option>
-                              <option value="ClickClassName">
-                                ClickClassName
-                              </option>
-                            </>
+                        <>
+                          <option value="ClickId">ClickId</option>
+                          <option value="ClickText">ClickText</option>
+                          <option value="ClickClassName">ClickClassName</option>
+                        </>
                       )}
                     </select>
                   </div>
@@ -155,7 +151,7 @@ const createTrigger = () => {
           </form>
         </div>
       </main>
-    </>
+    </div>
   );
 };
 

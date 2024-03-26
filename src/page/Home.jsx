@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 
 import SideBar from "../components/SideBar";
 import axios from "axios";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Cookies from "js-cookie";
 
 const Home = () => {
+
   const [tags, setTags] = useState([]);
+  // const token = Cookies.get('id')
   
   useEffect(() => {
     const id = Cookies.get('id')
@@ -16,30 +18,29 @@ const Home = () => {
         const res = await axios.get(
           "http://localhost:3000/api/tagTrigger/getAllTag/"+id
         );
-        console.log(res.data);
+        // console.log(res.data);
         setTags(res.data);
       } catch (error) {
         console.log(error);
       }
     };
     fetchTags();
-    console.log(id)
+    // console.log(id)
   }, []);
 
   return (
-    <>
+    <div className="flex ">
       <SideBar />
+
+      <div className="p-4 h-full w-full text-xs sm:text-sm md:text-base  ">
       <Navbar/>
-
-
-      <div className="p-4 ml-64 h-full pt-20 ">
         <div className="p-4 border-2 border-slate-950 border-solid rounded-lg ">
           <div className="flex justify-between items-center">
             <h3 className="px-6 py-2 font-bold">Tags</h3>
             <div className="flex gap-2">
               <NavLink
                 to={"/createTag"}
-                className="px-6 py-2 bg-blue-900 rounded-lg text-white"
+                className="px-2 py-1 sm:px-3 md:px-4 bg-blue-900 rounded-lg text-white "
               >
                 {" "}
                 New
@@ -76,15 +77,15 @@ const Home = () => {
                     <td className="text-wrap px-6 py-4 font-medium break-all">
                       {t.tagType}
                     </td>
-                    <td className="text-wrap px-6 py-4 font-medium break-all flex flex-col gap-2">
+                    <td className="text-wrap px-6 py-4 font-medium break-all flex flex-wrap gap-2 ">
                       {t.trigger.map((i) => (
-                        <p
-                          className="bg-red-300 rounded-lg px-2 text-center"
+                        <span
+                          className="bg-red-300 rounded-lg px-2 py-1 text-center"
                           key={i._id}
                         >
                           {" "}
                           {i.triggerName}
-                        </p>
+                        </span>
                       ))}
                     </td>
                     <td className=" text-wrap px-6 py-4 font-medium break-all">
@@ -99,7 +100,7 @@ const Home = () => {
       </div>
 
       
-    </>
+    </div>
   );
 };
 

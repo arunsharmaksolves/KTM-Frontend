@@ -10,20 +10,20 @@ const Script = () => {
         toast.success("Copied Successfully")
     }
   return (
-    <>
+    <div className="flex">
       <SideBar />
+
+
+      <div className="p-4 flex w-full h-full flex-col items-center justify-center">
       <Navbar/>
-
-
-      <div className=" ml-64 p-10 flex items-center justify-center">
-        <div className="border-red-500 border-solid border-2 p-10 rounded-lg relative bg-slate-900 text-white">
+        <div className=" border-solid border-2 p-10 rounded-lg relative bg-slate-900 text-white">
             <span className=" text-xl break-all ">
             https://cdn.jsdelivr.net/gh/arunsharmaksolves/cdn@1.1.2/index.min.js
             </span>
             <button className="absolute bottom-0 right-0 text-xl py-1 text-white font-bold px-3 rounded-lg bg-teal-600" onClick={copy}>Copy</button>
             </div>
       </div>
-    </>
+    </div>
   );
 };
 

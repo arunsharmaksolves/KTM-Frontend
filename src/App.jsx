@@ -10,12 +10,12 @@ import ForgotPassword from "./page/ForgotPassword";
 import ResetPassword from "./page/ResetPassword";
 import Trigger from "./page/Trigger";
 import Home from "./page/Home";
-import Cookies from "js-cookie";
 import CreateTag from "./components/CreateTag";
 import CreateTrigger from "./components/CreateTrigger";
 import UpdateTag from "./components/UpdateTag";
 import Script from "./components/Script";
 import Analytics from "./components/Analytics";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -27,13 +27,17 @@ function App() {
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/reset-password/:id" element={<ResetPassword />} />
 
-        <Route path="/home" element={<Home />} />
-        <Route path="/createTag" element={<CreateTag />} />
-        <Route path="/trigger" element={<Trigger />} />
-        <Route path="/createTrigger" element={<CreateTrigger />} />
-        <Route path="/updateTag/:id" element={<UpdateTag />} />
-        <Route path="/script" element={<Script />} />
-        <Route path="/analytics" element={<Analytics />} />
+          
+        <Route element={<ProtectedRoute />}>
+          <Route path="/home" element={<Home />} />
+
+          <Route path="/createTag" element={<CreateTag />} />
+          <Route path="/trigger" element={<Trigger />} />
+          <Route path="/createTrigger" element={<CreateTrigger />} />
+          <Route path="/updateTag/:id" element={<UpdateTag />} />
+          <Route path="/script" element={<Script />} />
+          <Route path="/analytics" element={<Analytics />} />
+        </Route>
 
         {/* magic found from medium */}
         <Route path="*" element={<Notfound />} />

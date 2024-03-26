@@ -72,11 +72,11 @@ const updateTag = () => {
   }
 
   return (
-    <>
+    <div className="flex ">
       <SideBar />
-      <Navbar/>
 
-      <div className="ml-64 p-4 flex items-center flex-col">
+      <div className="p-4 h-full w-full flex items-center flex-col">
+      <Navbar/>
         <div className="px-4 sm:px-0">
           <h3 className="text-base font-semibold leading-7 text-gray-900">
             Tag Information
@@ -212,7 +212,7 @@ const updateTag = () => {
 
 }
       </div>
-    </>
+    </div>
   );
 };
 

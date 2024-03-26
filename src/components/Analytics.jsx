@@ -26,10 +26,10 @@ const Analytics = () => {
 
   return (
     
-    <>
+    <div className='flex '>
     <SideBar/>
+    <div className="p-4 w-full h-screen">
     <Navbar/>
-    <div className="p-4 ml-64 h-screen">
         <div className="p-4 border-2 border-slate-950 border-solid rounded-lg   ">
           <div className="flex justify-between">
             <h3 className="px-6 py-2">Analytics-Dashboard</h3>
@@ -83,7 +83,7 @@ const Analytics = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
