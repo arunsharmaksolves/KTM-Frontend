@@ -8,7 +8,6 @@ import Cookies from "js-cookie";
 
 const updateTag = () => {
   const tagId = useParams().id;
-  console.log(tagId);
   const token = Cookies.get('token')
 
 

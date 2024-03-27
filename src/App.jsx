@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, ScrollRestoration } from "react-router-dom";
 import Register from "./page/Register";
 import Verify from "./page/Verify";
 import Notfound from "./page/Notfound";
@@ -29,6 +29,7 @@ function App() {
 
           
         <Route element={<ProtectedRoute />}>
+
           <Route path="/home" element={<Home />} />
 
           <Route path="/createTag" element={<CreateTag />} />
@@ -44,6 +45,8 @@ function App() {
 
         {/* magic found from medium */}
         <Route path="*" element={<Notfound />} />
+        
+        {/* <Route element={<Notfound />} />  in Cass of SWITCH*/}
       </Routes>
     </Router>
   );

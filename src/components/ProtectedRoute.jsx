@@ -1,6 +1,6 @@
 import Cookies from "js-cookie";
 import React from "react";
-import { Navigate, Outlet } from "react-router-dom";
+import { Navigate, Outlet, ScrollRestoration } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
 
 const ProtectedRoute = () => {
@@ -16,7 +16,10 @@ const ProtectedRoute = () => {
   }
 
   // Check if decodedToken exists and is valid
-  return decodedToken ? <Outlet /> : <Navigate to="/login" />;
+  return decodedToken ?
+    
+   <Outlet /> 
+   : <Navigate to="/login" />;
 };
 
 export default ProtectedRoute;

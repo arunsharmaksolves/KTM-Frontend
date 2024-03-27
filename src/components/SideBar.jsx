@@ -53,10 +53,11 @@ const SideBar = () => {
   return (
     <aside
       id="default-sidebar"
-      className="w-fit h-screen "
+      className="w-fit h-screen"
       aria-label="Sidebar"
+
     >
-      <div className="h-full px-3 py-4 overflow-y-auto border-2 border-black-500">
+      <div className="h-full px-3 py-4 overflow-y-auto border-2 border-black-500 ">
         <ul className="space-y-2 font-medium">
           <li>
             <NavLink

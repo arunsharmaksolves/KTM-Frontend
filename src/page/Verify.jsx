@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useParams } from "react-router-dom";
 import axios from 'axios'
+import Navbar from "../components/Navbar";
 
 const Verify = () => {
-  const params = useLocation()
-  const token = params.pathname.split('/')[2]
+  // const params = useLocation()
+  // const token = params.pathname.split('/')[2]
+  const token = useParams().id
   const [falt,setFalt] = useState()
 
   const verifyEmail= async() =>{
@@ -18,14 +20,14 @@ const Verify = () => {
 
   useEffect(()=>{
     verifyEmail()
-  },[params])
+  },[token])
     
   return (
     <>
+      <Navbar/>
       <div className="flex items-center justify-center flex-col mt-10">
         <section className="w-full mx-auto">
           <header className="py-8 flex justify-center w-full">
-            <p className="text-xl text-[#365CCE] sm:text-3xl tracking-wider font-bold">Chat App</p>
           </header>
 
           <div className="h-[200px] bg-[#365CCE] w-full text-white flex items-center justify-center flex-col gap-5">
