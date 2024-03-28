@@ -42,11 +42,11 @@ const createTrigger = () => {
     }
   };
   return (
-    <div className="flex">
-      <SideBar />
+    <div className="flex flex-col w-full">
+      {/* <SideBar /> */}
 
-      <main className="flex flex-col items-center p-4 h-screen w-full">
         <Navbar />
+      <main className="flex flex-col items-center p-4 h-screen w-full">
         <div className="flex flex-col gap-y-5 p-10 h-min border-solid border-2 border-black-500 rounded-2xl sm:w-[425px] ">
           <p className="text-center pb-5 text-2xl font-bold ">
             Trigger Configuration

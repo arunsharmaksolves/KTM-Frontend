@@ -1,7 +1,8 @@
 import Cookies from "js-cookie";
 import React from "react";
-import { Navigate, Outlet, ScrollRestoration } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 import { jwtDecode } from "jwt-decode";
+import SideBar from "./SideBar";
 
 const ProtectedRoute = () => {
   let decodedToken
@@ -17,9 +18,12 @@ const ProtectedRoute = () => {
 
   // Check if decodedToken exists and is valid
   return decodedToken ?
-    
+  <div className="flex">
+  <SideBar/>
    <Outlet /> 
+   </div>
    : <Navigate to="/login" />;
-};
+  
+}
 
 export default ProtectedRoute;

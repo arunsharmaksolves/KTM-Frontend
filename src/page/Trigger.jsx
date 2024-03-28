@@ -32,11 +32,11 @@ const Trigger = () => {
   }, []);
 
   return (
-    <div className="flex ">
-      <SideBar />
+    <div className="flex flex-col w-full">
+      {/* <SideBar /> */}
 
-      <div className="p-4 h-full w-fit sm:w-full text-xs sm:text-sm md:text-base  ">
         <Navbar />
+      <div className="p-4 h-full w-fit sm:w-full text-xs sm:text-sm md:text-base  ">
         <div className="p-4 border-2 border-slate-950 border-solid rounded-lg   ">
         <div className="flex justify-between items-center">
             <h3 className="px-6 py-2 font-bold">Triggers</h3>

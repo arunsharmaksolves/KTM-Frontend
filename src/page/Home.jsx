@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 
 import SideBar from "../components/SideBar";
 import axios from "axios";
-import { Link, NavLink, useParams } from "react-router-dom";
+import { Link, NavLink, useLocation, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Cookies from "js-cookie";
 
 const Home = () => {
   const params = useParams()
   // console.log(params)
+  // const token = useLocation()
+  // console.log(token)
 
   const [tags, setTags] = useState([]);
   
@@ -37,11 +39,9 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="flex ">
-      <SideBar />
-
-      <div className="p-4 h-full w-fit sm:w-full text-xs sm:text-sm md:text-base  ">
+    <div className="flex flex-col w-full">
       <Navbar/>
+      <div className="p-4 h-full w-fit sm:w-full text-xs sm:text-sm md:text-base  ">
         <div className="p-4 border-2 border-slate-950 border-solid rounded-lg ">
           <div className="flex justify-between items-center">
             <h3 className="px-6 py-2 font-bold">Tags</h3>

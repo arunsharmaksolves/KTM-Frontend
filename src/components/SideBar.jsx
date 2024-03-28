@@ -53,14 +53,14 @@ const SideBar = () => {
   return (
     <aside
       id="default-sidebar"
-      className="w-fit h-screen"
+      className="w-fit h-screen sticky left-0"
       aria-label="Sidebar"
-
     >
       <div className="h-full px-3 py-4 overflow-y-auto border-2 border-black-500 ">
         <ul className="space-y-2 font-medium">
           <li>
             <NavLink
+              // to="/home" state={"priyanshu"}
               to="/home"
               className="aria-[current=page]:text-red-600 flex justify-center items-center p-2 rounded-lg  hover:cursor-pointer hover:bg-slate-200"
             >

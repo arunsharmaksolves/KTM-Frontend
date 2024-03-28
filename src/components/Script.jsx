@@ -10,12 +10,11 @@ const Script = () => {
         toast.success("Copied Successfully")
     }
   return (
-    <div className="flex">
-      <SideBar />
+    <div className="flex flex-col w-full">
+      {/* <SideBar /> */}
 
-
-      <div className="p-4 flex w-full h-full flex-col items-center justify-center">
       <Navbar/>
+      <div className="p-4 flex w-full h-full flex-col items-center justify-center">
         <div className=" border-solid border-2 p-10 rounded-lg relative bg-slate-900 text-white">
             <span className=" text-xl break-all ">
             https://cdn.jsdelivr.net/gh/arunsharmaksolves/cdn@1.1.2/index.min.js
