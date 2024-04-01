@@ -6,12 +6,12 @@ import Navbar from "../components/Navbar";
 const Verify = () => {
   // const params = useLocation()
   // const token = params.pathname.split('/')[2]
-  const token = useParams().id
-  const [falt,setFalt] = useState()
+  // const token = useParams().id
+  // const [falt,setFalt] = useState()
 
   const verifyEmail= async() =>{
     try { 
-      const res = await axios.get('https://ktm-backend.onrender.com/api/verify/'+token)
+      const res = await axios.get('http://localhost:3000/api/verify/'+token)
       console.log(res.data)
     } catch (err) {
       setFalt(err.response.data.message)    

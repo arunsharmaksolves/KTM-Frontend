@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import SideBar from "./SideBar";
 import axios from "axios";
 import Navbar from "./Navbar";
 import Cookies from "js-cookie";
-import { ScrollRestoration } from "react-router-dom";
 
 const Analytics = () => {
   const [trigger, setTrigger] = useState([]);
@@ -12,7 +10,7 @@ const Analytics = () => {
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const res = await axios.get("https://ktm-server-7zfr.onrender.com/events", {
+        const res = await axios.get("http://localhost:4000/events", {
           headers: {
             Authorization: `Bearer ${token}`,
           },

@@ -24,14 +24,14 @@ const updateTag = () => {
       try {
         const id = Cookies.get("id");
         const taginfo = await axios.get(
-          "https://ktm-backend.onrender.com/api/tagTrigger/getOneTag/" + tagId,{
+          "http://localhost:3000/api/tagTrigger/getOneTag/" + tagId,{
             headers: {
               Authorization: `Bearer ${token}`,
             },
           }
         );
         const triggerInfo = await axios.get(
-          "https://ktm-backend.onrender.com/api/trigger/getAllTrigger/" + id,{
+          "http://localhost:3000/api/trigger/getAllTrigger/" + id,{
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -74,7 +74,7 @@ const updateTag = () => {
     }
     try {
       const res = await axios.patch(
-        "https://ktm-backend.onrender.com/api/tagTrigger/addTrigger/" + tagId,
+        "http://localhost:3000/api/tagTrigger/addTrigger/" + tagId,
         {
           updateTrig,
         }

@@ -1,7 +1,5 @@
-import { useEffect, useState } from "react";
-
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route, ScrollRestoration } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Register from "./page/Register";
 import Verify from "./page/Verify";
 import Notfound from "./page/Notfound";

@@ -25,7 +25,7 @@ const CreateTag = () => {
   const onSubmit = async (data) => {
     data.userId = Cookies.get("id")
     try {
-      const res =await axios.post('https://ktm-backend.onrender.com/api/tagTrigger/createTag',{data},{
+      const res =await axios.post('http://localhost:3000/api/tagTrigger/createTag',{data},{
         headers: {
           Authorization: `Bearer ${token}`,
         },

@@ -25,14 +25,14 @@ const SideBar = () => {
     try {
       const id = Cookies.get('id')
       const countTag = await axios.get(
-        "https://ktm-backend.onrender.com/api/tagTrigger/countAllTag/"+id,{
+        "http://localhost:3000/api/tagTrigger/countAllTag/"+id,{
           headers: {
             Authorization: `Bearer ${token}`,
           },
         }
       );
       const countTrigger = await axios.get(
-        "https://ktm-backend.onrender.com/api/trigger/countAllTrigger/"+id,{
+        "http://localhost:3000/api/trigger/countAllTrigger/"+id,{
           headers: {
             Authorization: `Bearer ${token}`,
           },

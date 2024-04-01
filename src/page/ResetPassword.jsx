@@ -20,7 +20,7 @@ const ResetPassword = () => {
         const onSubmit = async(data) => {
             try {
               // console.log(data);
-              const res = await axios.patch('https://ktm-backend.onrender.com/api/reset-password/'+token,{
+              const res = await axios.patch('http://localhost:3000/api/reset-password/'+token,{
                 data
               })
               console.log(res.data)

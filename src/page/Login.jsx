@@ -20,7 +20,7 @@ const Login = () => {
   const onSubmit = async (data) => {
     try {
       // console.log(data);
-      const res = await axios.post("https://ktm-backend.onrender.com/api/login", {
+      const res = await axios.post("http://localhost:3000/api/login", {
         data,
       });
       // console.log(res.data.verificationToken);

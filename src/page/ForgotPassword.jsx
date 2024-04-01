@@ -17,7 +17,7 @@ const ForgotPassword = () => {
     console.log(data.email)
     try {
       setFalt('')
-        const res = await axios.post("https://ktm-backend.onrender.com/api/forgot-password",{data})
+        const res = await axios.post("http://localhost:3000/api/forgot-password",{data})
         console.log(res.data)
         toast.success("Email Sent")
     } catch (error) {

@@ -23,7 +23,7 @@ const Home = () => {
     const fetchTags = async () => {
       try {
         const res = await axios.get(
-          "https://ktm-backend.onrender.com/api/tagTrigger/getAllTag/"+id
+          "http://localhost:3000/api/tagTrigger/getAllTag/"+id
           ,{
             headers: {
               Authorization: `Bearer ${token}`,
