@@ -26,7 +26,7 @@ const createTrigger = () => {
       data.userId = Cookies.get("id");
       console.log(data);
       const res = await axios.post(
-        "http://localhost:3000/api/trigger/createTrigger",
+        "https://ktm-backend.onrender.com/api/trigger/createTrigger",
         { data },{
           headers: {
             Authorization: `Bearer ${token}`,

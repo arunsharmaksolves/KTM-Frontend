@@ -5,6 +5,7 @@ import axios from "axios";
 import { Link, NavLink, useLocation, useParams } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const params = useParams()
@@ -13,6 +14,7 @@ const Home = () => {
   // console.log(token)
 
   const [tags, setTags] = useState([]);
+  const [isFetched, setIsFetched] = useState(false);
   
   useEffect(() => {
     const id = Cookies.get('id')
@@ -21,7 +23,7 @@ const Home = () => {
     const fetchTags = async () => {
       try {
         const res = await axios.get(
-          "http://localhost:3000/api/tagTrigger/getAllTag/"+id
+          "https://ktm-backend.onrender.com/api/tagTrigger/getAllTag/"+id
           ,{
             headers: {
               Authorization: `Bearer ${token}`,
@@ -32,11 +34,14 @@ const Home = () => {
         setTags(res.data);
       } catch (error) {
         console.log(error);
+        if(error.message){
+          toast.error(error.message)
+        }
       }
     };
     fetchTags();
     // console.log(id)
-  }, []);
+  }, [isFetched]);
 
   return (
     <div className="flex flex-col w-full">

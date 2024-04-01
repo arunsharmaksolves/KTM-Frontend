@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios'
 import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
+import { Props } from "../context/propContext";
 
 const Register = () => {
   const [msg,setMsg] = useState('')
@@ -13,6 +14,9 @@ const Register = () => {
     reset,
     formState: { errors },
   } = useForm();
+
+  const {data,setData} = useContext(Props)
+  console.log(data)
 
 
   const onSubmit = async(data) => {
@@ -78,7 +82,7 @@ const Register = () => {
             </label>
             <input
               className="border-2 rounded-md p-1 text-sm text-blue-900 placeholder:text-xs "
-              type="text"
+              type="password"
               name="Password"
               id="Password"
               placeholder="Enter your passwoord"

@@ -11,7 +11,7 @@ const Verify = () => {
 
   const verifyEmail= async() =>{
     try { 
-      const res = await axios.get('http://localhost:3000/api/verify/'+token)
+      const res = await axios.get('https://ktm-backend.onrender.com/api/verify/'+token)
       console.log(res.data)
     } catch (err) {
       setFalt(err.response.data.message)    

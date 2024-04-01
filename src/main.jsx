@@ -4,11 +4,14 @@ import App from './App.jsx'
 import './index.css'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { PropsContextProvider } from './context/propContext.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
   <>
-    <App />
+  <PropsContextProvider>
+
+  <App />
     <ToastContainer
     position="top-right"
     autoClose={2000}
@@ -20,6 +23,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     pauseOnHover
     theme="light"
     />
+    </PropsContextProvider>
   </>
 
   // </React.StrictMode>,
