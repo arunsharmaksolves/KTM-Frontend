@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate} from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import Cookies from "js-cookie";
@@ -16,6 +16,7 @@ const Login = () => {
     formState: { errors },
   } = useForm();
 
+
   const onSubmit = async (data) => {
     try {
       // console.log(data);
@@ -24,13 +25,13 @@ const Login = () => {
       });
       // console.log(res.data.verificationToken);
       const token = res.data.verificationToken;
-      const decodedToken = jwtDecode(token);
+      // const decodedToken = jwtDecode(token);
       // console.log(decodedToken);
       Cookies.set("token", `${token}`, { expires: 7 });
 
       toast.success("Login Successfully");
       reset();
-      navigate("/home");
+      navigate("/home",{state:token});
     } catch (error) {
       console.log(error);
       toast.error(error.response.data.message);

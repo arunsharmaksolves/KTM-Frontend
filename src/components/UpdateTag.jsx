@@ -8,7 +8,6 @@ import Cookies from "js-cookie";
 
 const updateTag = () => {
   const tagId = useParams().id;
-  console.log(tagId);
   const token = Cookies.get('token')
 
 
@@ -80,8 +79,8 @@ const updateTag = () => {
           updateTrig,
         }
       );
-      console.log(res.data);
-      console.log(updateTrig);
+      // console.log(res.data);
+      // console.log(updateTrig);
       toast.success("Trigger Added");
       setUpdateTrig([]);
       setUpdateMode(false);
@@ -91,11 +90,11 @@ const updateTag = () => {
   };
 
   return (
-    <div className="flex ">
-      <SideBar />
+    <div className="flex flex-col w-full" >
+      {/* <SideBar /> */}
 
-      <div className="p-4 h-full w-full flex items-center flex-col">
         <Navbar />
+      <div className="p-4 h-full w-full flex items-center flex-col">
         <div className="px-4 sm:px-0">
           <h3 className="text-base font-semibold leading-7 text-gray-900">
             Tag Information

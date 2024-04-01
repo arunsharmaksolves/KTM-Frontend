@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import axios from 'axios'
 
@@ -7,8 +7,7 @@ import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
 
 const ResetPassword = () => {
-  const params = useLocation()
-  const token = params.pathname.split('/')[2]
+  const token = useParams().id
   const navigate = useNavigate()
   const [falt,setFalt] = useState()
 
@@ -90,6 +89,8 @@ const ResetPassword = () => {
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 my-3 text-sm font-semibold  text-white hover:bg-indigo-800 hover:cursor-pointer"
             />
           </form>
+
+          
 
         </div>
       </main>
