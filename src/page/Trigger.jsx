@@ -16,7 +16,7 @@ const Trigger = () => {
       try {
         const id = Cookies.get("id");
         const res = await axios.get(
-          "http://localhost:3000/api/trigger/getAllTrigger/" + id,{
+          "https://ktm-backend.onrender.com/api/trigger/getAllTrigger/" + id,{
             headers: {
               Authorization: `Bearer ${token}`,
             },

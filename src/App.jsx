@@ -22,6 +22,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Register />} />
+
         <Route path="/verify/:id" element={<Verify />} />
         <Route path="/login" element={<Login />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />

@@ -12,7 +12,7 @@ const Analytics = () => {
   useEffect(() => {
     const fetchTags = async () => {
       try {
-        const res = await axios.get("http://localhost:4000/events", {
+        const res = await axios.get("https://ktm-server-7zfr.onrender.com/events", {
           headers: {
             Authorization: `Bearer ${token}`,
           },
