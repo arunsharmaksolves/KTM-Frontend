@@ -9,8 +9,6 @@ import { PropsContextProvider } from './context/propContext.jsx';
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
   <>
-  <PropsContextProvider>
-
   <App />
     <ToastContainer
     position="top-right"
@@ -23,7 +21,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     pauseOnHover
     theme="light"
     />
-    </PropsContextProvider>
   </>
 
   // </React.StrictMode>,

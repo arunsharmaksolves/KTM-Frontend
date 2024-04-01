@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import axios from 'axios'
 import { toast } from "react-toastify";
 import Navbar from "../components/Navbar";
-import { Props } from "../context/propContext";
 
 const Register = () => {
   const [msg,setMsg] = useState('')
@@ -14,10 +13,6 @@ const Register = () => {
     reset,
     formState: { errors },
   } = useForm();
-
-  const {data,setData} = useContext(Props)
-  console.log(data)
-
 
   const onSubmit = async(data) => {
     try {
